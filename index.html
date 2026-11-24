@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanTrends | Clothing Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <header class="header">
+    <div class="header-left">
+      <button id="menu-btn" class="icon-btn" aria-label="Open menu">&#9776;</button>
+      <div class="logo-box">UT</div> <!-- logo placeholder -->
+      <h1 class="brand">UrbanTrends </h1>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" aria-label="Profile">&#128100;</button>
+      <button class="icon-btn cart-btn" aria-label="Cart">
+        &#128722;
+        <span id="cart-count" class="badge">0</span>
+      </button>
+    </div>
+  </header>
+
+
+  <nav id="sidebar" class="sidebar">
+    <button id="close-btn" class="close-btn">&times;</button>
+    <a href="#new-arrivals">New Arrivals</a>
+    <a href="#best-sellers">Best Sellers</a>
+    <a href="#streetwear">Streetwear</a>
+    <a href="#basics">Basics</a>
+    <a href="#sale">Sale Items</a>
+  </nav>
+  <div id="overlay" class="overlay"></div>
+
+  <main>
+
+    <section class="hero">
+      <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900');">
+        <div class="banner-text">
+          <p>Spring / Summer 2026</p>
+          <h2>The New Collection</h2>
+          <a href="#new-arrivals" class="btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="banner" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900');">
+        <div class="banner-text">
+          <p>Members Only</p>
+          <h2>25% Off Layers</h2>
+          <a href="#sale" class="btn">See Deals</a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="filter-bar">
+      <div class="categories">
+        <button class="cat-btn active" data-cat="all">All</button>
+        <button class="cat-btn" data-cat="men">Men</button>
+        <button class="cat-btn" data-cat="women">Women</button>
+        <button class="cat-btn" data-cat="outerwear">Outerwear</button>
+      </div>
+      <select id="sort-select">
+        <option value="featured">Sort: Featured</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+      </select>
+    </section>
+
+
+    <section class="product-section" id="new-arrivals">
+      <h2>New Arrivals</h2>
+      <div class="product-grid" data-section="new"></div>
+    </section>
+
+    <section class="product-section" id="best-sellers">
+      <h2>Best Sellers</h2>
+      <div class="product-grid" data-section="best"></div>
+    </section>
+
+    <section class="product-section" id="streetwear">
+      <h2>Streetwear</h2>
+      <div class="product-grid" data-section="street"></div>
+    </section>
+
+    <section class="product-section" id="basics">
+      <h2>Basics</h2>
+      <div class="product-grid" data-section="basics"></div>
+    </section>
+
+    <section class="product-section" id="sale">
+      <h2>Sale Items</h2>
+      <div class="product-grid" data-section="sale"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 UrbanThread. Student project.</p>
+  </footer>
+
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
