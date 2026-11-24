@@ -261,3 +261,121 @@ button { font-family: inherit; cursor: pointer; }
   .brand { font-size: 18px; }
   .card img { height: 200px; }
 }
+
+/* login */
+a.icon-btn { display: inline-block; }
+.brand a { color: inherit; }
+
+.auth-section {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+  min-height: 70vh;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  padding: 24px;
+  align-self: flex-start;
+}
+
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #eee;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 12px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  font-size: 16px;
+  color: #777;
+}
+.auth-tab:hover { color: #222; }
+.auth-tab.active { color: #222; border-bottom-color: #222; font-weight: bold; }
+
+
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+
+.auth-form h2 { font-size: 26px; margin-bottom: 6px; }
+.auth-sub { color: #666; font-size: 14px; margin-bottom: 20px; }
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 15px;
+}
+.form-group input:focus { outline: none; border-color: #222; }
+
+
+.form-group input.invalid { border-color: #d33; }
+.error {
+  display: block;
+  color: #d33;
+  font-size: 12px;
+  margin-top: 4px;
+  min-height: 14px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+
+.form-group .check-row { margin-bottom: 0; }
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.auth-btn:hover { background: #444; }
+
+.switch-text {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+.switch-link {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 0;
+}
+.switch-link:hover { color: #d33; }

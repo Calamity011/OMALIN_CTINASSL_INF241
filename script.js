@@ -133,7 +133,157 @@ catButtons.forEach(function (btn) {
   });
 });
 
-sortSelect.addEventListener("change", renderProducts);
+if (sortSelect) {
+  sortSelect.addEventListener("change", renderProducts);
+}
 
-// ===== START =====
 renderProducts();
+
+//login & register
+if (document.querySelector(".auth-card")) {
+
+  const authTabs   = document.querySelectorAll(".auth-tab");
+  const authForms  = document.querySelectorAll(".auth-form");
+  const switchLinks = document.querySelectorAll(".switch-link");
+  const loginForm    = document.getElementById("login-form");
+  const registerForm = document.getElementById("register-form");
+
+
+  function showForm(formId) {
+    authForms.forEach(function (f) {
+      f.classList.toggle("active", f.id === formId);
+    });
+    authTabs.forEach(function (t) {
+      t.classList.toggle("active", t.dataset.target === formId);
+    });
+    clearAllErrors();
+  }
+
+  authTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () { showForm(tab.dataset.target); });
+  });
+  switchLinks.forEach(function (link) {
+    link.addEventListener("click", function () { showForm(link.dataset.target); });
+  });
+
+
+  if (window.location.hash === "#register") showForm("register-form");
+
+
+  document.querySelectorAll(".show-pass").forEach(function (box) {
+    box.addEventListener("change", function () {
+      const input = document.getElementById(box.dataset.target);
+      input.type = box.checked ? "text" : "password";
+    });
+  });
+
+
+  function setError(input, message) {
+    const msg = input.closest(".form-group").querySelector(".error");
+    msg.textContent = message;
+    if (input.type !== "checkbox") input.classList.add("invalid");
+  }
+
+  function clearAllErrors() {
+    document.querySelectorAll(".error").forEach(function (e) { e.textContent = ""; });
+    document.querySelectorAll(".invalid").forEach(function (i) { i.classList.remove("invalid"); });
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+
+  function getUsers() {
+    return JSON.parse(localStorage.getItem("users")) || [];
+  }
+  function saveUsers(users) {
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+
+
+  registerForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    clearAllErrors();
+
+    const name    = document.getElementById("reg-name");
+    const email   = document.getElementById("reg-email");
+    const pass    = document.getElementById("reg-password");
+    const confirm = document.getElementById("reg-confirm");
+    const terms   = document.getElementById("reg-terms");
+    let ok = true;
+
+    if (name.value.trim().length < 2) {
+      setError(name, "Please enter your full name."); ok = false;
+    }
+    if (!isValidEmail(email.value.trim())) {
+      setError(email, "Please enter a valid email."); ok = false;
+    }
+    if (pass.value.length < 6) {
+      setError(pass, "Password must be at least 6 characters."); ok = false;
+    }
+    if (confirm.value !== pass.value) {
+      setError(confirm, "Passwords do not match."); ok = false;
+    }
+    if (!terms.checked) {
+      setError(terms, "You must agree to the terms."); ok = false;
+    }
+    if (!ok) return;
+
+
+    const users = getUsers();
+    const exists = users.some(function (u) {
+      return u.email === email.value.trim().toLowerCase();
+    });
+    if (exists) {
+      setError(email, "This email is already registered.");
+      return;
+    }
+
+    users.push({
+      name: name.value.trim(),
+      email: email.value.trim().toLowerCase(),
+      password: pass.value
+    });
+    saveUsers(users);
+
+    showToast("Account created! You can log in now.");
+    registerForm.reset();
+    setTimeout(function () {
+      showForm("login-form");
+      document.getElementById("login-email").focus();
+    }, 1200);
+  });
+
+  
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    clearAllErrors();
+
+    const email = document.getElementById("login-email");
+    const pass  = document.getElementById("login-password");
+    let ok = true;
+
+    if (!isValidEmail(email.value.trim())) {
+      setError(email, "Please enter a valid email."); ok = false;
+    }
+    if (pass.value === "") {
+      setError(pass, "Please enter your password."); ok = false;
+    }
+    if (!ok) return;
+
+
+    const user = getUsers().find(function (u) {
+      return u.email === email.value.trim().toLowerCase() && u.password === pass.value;
+    });
+
+    if (!user) {
+      setError(pass, "Wrong email or password.");
+      return;
+    }
+
+    localStorage.setItem("currentUser", user.name);
+    showToast("Welcome back, " + user.name + "!");
+    setTimeout(function () { window.location.href = "index.html"; }, 1200);
+  });
+}
